@@ -2,6 +2,8 @@ from web_scrap.colect import SinanDownloader, load_config
 from load import conectar_db, inserir_dados_no_postgres
 from extract import ler_arquivo
 from transform import DataFrameHans, selecionar_colunas
+import rpy2.robjects as robjects
+from rpy2.robjects.packages import importr
 
 
 # Download dos dados
@@ -20,7 +22,22 @@ def baixar_dados_sinan():
     # Chamando o método get_data para baixar os dados
     downloader.get_data(tipos, local, anos)
 
+
 baixar_dados_sinan()
+
+
+# Execussão do R script
+# Rscript ./src/web_scrap/convert.r
+
+# Carregar a biblioteca base do R
+base = importr('base')
+
+# Caminho do R script
+script_path = './src/web_scrap/convert.r'
+
+# Executar o script R
+script = robjects.load_script(script_path)
+result = script.run()
 
 
 # Importar dados em CSV
