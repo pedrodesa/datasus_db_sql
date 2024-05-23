@@ -23,6 +23,7 @@ class SinanDownloader:
         try:
             urllib.request.urlretrieve(url, local_path)
             print(f'Arquivo {local_path} baixado com sucesso')
+
         except Exception as erro:
             print(f'Erro ao baixar arquivo {local_path}: {erro}')
 
@@ -41,4 +42,5 @@ def load_config(filename):
     """
     with open(filename) as user_file:
         config = json.load(user_file)
+
     return config
