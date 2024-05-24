@@ -10,7 +10,7 @@ PostgreSQL
 PgAdmin4
 
 ## Web scraping de dados
-
+A coleta de dados foi via FTP da página do DATASUS.
 
 
 ## Banco de Dados - PostgreSQL com Docker
@@ -81,3 +81,45 @@ POSTGRES_USER=meu_usuario
 POSTGRES_DB=meu_banco
 ```
 
+# Como usar a aplicação
+
+1. Baixar o projeto para a máquina:
+```
+git clone <url do projeto>
+```
+
+2. Criar um ambiente virtual no Python:
+```
+python -m venv .venv
+```
+
+3. Acessar o ambiente virtual:
+```
+Windows: .venv/Scripts/activate
+Linux: source .venv/bin/activate
+```
+
+4. Instalar dependências do projeto:
+```
+pip install -r requirements.txt
+```
+
+5. Para rodar o web scraping dentro da pasta src/ use o comando:
+```
+python web_scrap/main.py
+```
+
+6. Para converter os arquivos DBC em CSV dentro da pasta raiz do projeto use o comando:
+```
+Rscript ./src/convert.r
+```
+
+7. Para rodar o ETL dentro da pasta src/ use o comando:
+```
+python main.py
+```
+
+8. Ao finalizar, desative o ambiente virtual
+```
+deactivate
+```
