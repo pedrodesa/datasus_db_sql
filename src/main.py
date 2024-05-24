@@ -1,59 +1,66 @@
 from etl.load import conectar_db, inserir_dados_no_postgres
 from etl.extract import ler_arquivo
 from etl.transform import selecionar_colunas
+# from etl.validation import DataFrameHans
 
 
 def main():
     # Importar dados em CSV
-    path = './data/hans.csv'
+    path = './data/output/hans.csv'
 
     dados = ler_arquivo(path, separador=';')
 
     # Selecionar variáveis
     variaveis = [
-        'dt_notific',
-        'sg_uf_not',
-        'id_municip',
-        'id_unidade',
-        'dt_diag',
-        'ano_nasc',
-        'nu_idade_n',
-        'cs_sexo',
-        'cs_gestant',
-        'cs_raca',
-        'cs_escol_n',
-        'sg_uf',
-        'id_mn_resi',
-        'id_ocupa_n',
-        'nu_lesoes',
-        'formaclini',
-        'avalia_n',
-        'classopera',
-        'modoentr',
-        'mododetect',
-        'baciloscop',
-        'dtinictrat',
-        'esq_ini_n',
-        'contreg',
-        'nervosafet',
-        'ufatual',
-        'id_muni_at',
-        'dt_noti_at',
-        'ufresat',
-        'muniresresat',
-        'dtultcomp',
-        'classatual',
-        'aval_atu_n',
-        'esq_atu_n',
-        'dose_receb',
-        'epis_racio',
-        'dtmudesq',
-        'contexam',
-        'dtalta_n',
-        'tpalta_n'
+        'DT_NOTIFIC',
+        'SG_UF_NOT',
+        'ID_MUNICIP',
+        'ID_UNIDADE',
+        'DT_DIAG',
+        'ANO_NASC',
+        'NU_IDADE_N',
+        'CS_SEXO',
+        'CS_GESTANT',
+        'CS_RACA',
+        'CS_ESCOL_N',
+        'SG_UF',
+        'ID_MN_RESI',
+        'ID_OCUPA_N',
+        'NU_LESOES',
+        'FORMACLINI',
+        'AVALIA_N',
+        'CLASSOPERA',
+        'MODOENTR',
+        'MODODETECT',
+        'BACILOSCOP',
+        'DTINICTRAT',
+        'ESQ_INI_N',
+        'CONTREG',
+        'NERVOSAFET',
+        'UFATUAL',
+        'ID_MUNI_AT',
+        'DT_NOTI_AT',
+        'UFRESAT',
+        'MUNIRESAT',
+        'DTULTCOMP',
+        'CLASSATUAL',
+        'AVAL_ATU_N',
+        'ESQ_ATU_N',
+        'DOSE_RECEB',
+        'EPIS_RACIO',
+        'DTMUDESQ',
+        'CONTEXAM',
+        'DTALTA_N',
+        'TPALTA_N'
     ]
 
     dados = selecionar_colunas(dados, variaveis)
+
+    dados.columns = dados.columns.str.lower()
+
+    # Validação de dados
+    # dataframehans = DataFrameHans(**dados)
+    # print(dataframehans.model_dump())
 
     # Carregameto de dados no PostgreSQL
     nome_tabela = 'tb_hans_sinan'
