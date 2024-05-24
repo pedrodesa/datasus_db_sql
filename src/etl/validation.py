@@ -32,7 +32,7 @@ class DataFrameHans(BaseModel):
     id_muni_at: int
     dt_noti_at: datetime
     ufresat: int
-    muniresresat: int
+    muniresat: int
     dtultcomp: datetime
     classatual: int
     aval_atu_n: int
