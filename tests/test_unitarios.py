@@ -2,7 +2,7 @@ import os
 import pytest
 
 
-file_path = './data/hans.csv'
+file_path = './data/output/hans.csv'
 
 
 def test_file_exists():
